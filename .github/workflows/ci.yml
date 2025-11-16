@@ -11,25 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        components: rustfmt, clippy
-        override: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+          override: true
 
-    - name: Build
-      run: cargo build --verbose
+      - name: Build
+        run: cargo build --verbose
+        working-directory: ./greeting_cli
 
-    - name: Run Tests
-      run: cargo test --verbose
+      - name: Run Tests
+        run: cargo test --verbose
+        working-directory: ./greeting_cli
 
-    - name: Run Clippy
-      run: cargo clippy -- -D warnings
+      - name: Run Clippy
+        run: cargo clippy -- -D warnings
+        working-directory: ./greeting_cli
 
-    - name: Check Format
-      run: cargo fmt -- --check
-
+      - name: Check Format
+        run: cargo fmt -- --check
+        working-directory: ./greeting_cli
